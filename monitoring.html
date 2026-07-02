@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SilaDash — Cyber Monitoring</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="web.css">
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <i class="ti ti-shield-bolt"></i> SILADASH
+        </div>
+        <div class="nav-links">
+            <a href=".html" class="nav-item active">Monitoring</a>
+            <a href="Admin.html" class="nav-item">Kelola Data</a>
+        </div>
+        <div class="header-status">
+            <span id="clock" class="mono">--:--:--</span>
+            <div class="live-indicator">LIVE</div>
+        </div>
+    </nav>
+
+    <main class="content">
+
+        <!-- ── ACTION BUTTONS ── -->
+        <div class="action-bar">
+
+            <!-- Take Image -->
+            <button class="action-btn btn-capture" id="btn-capture">
+                <i class="ti ti-camera"></i>
+                <div class="btn-label">
+                    <span>TAKE IMAGE</span>
+                    <span class="btn-sublabel">ambil foto wajah</span>
+                </div>
+                <div class="btn-status-dot"></div>
+            </button>
+
+            <!-- Training -->
+            <button class="action-btn btn-training" id="btn-training">
+                <i class="ti ti-brain"></i>
+                <div class="btn-label">
+                    <span>TRAINING</span>
+                    <span class="btn-sublabel">latih model AI</span>
+                </div>
+                <div class="btn-status-dot"></div>
+            </button>
+
+            <!-- Automatic Attendance -->
+            <button class="action-btn btn-attendance" id="btn-attendance">
+                <i class="ti ti-users-group"></i>
+                <div class="btn-label">
+                    <span>AUTO ATTENDANCE</span>
+                    <span class="btn-sublabel">absensi otomatis</span>
+                </div>
+                <div class="btn-status-dot"></div>
+            </button>
+
+        </div>
+
+        <!-- ── MAIN PANELS ── -->
+        <div class="main-grid">
+
+            <div class="panel">
+                <div class="panel-header"><i class="ti ti-scan"></i> FACE RECOGNITION SYSTEM</div>
+                <div class="face-screen" style="position:relative;overflow:hidden;">
+                    <!-- Live video stream dari Python -->
+                    <img id="camera-stream" src="http://127.0.0.1:5000/api/video-feed"
+                        style="width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 0.5s;"
+                        onerror="this.style.opacity='0';document.getElementById('camera-offline').style.display='flex';"
+                        onload="this.style.opacity='1';document.getElementById('camera-offline').style.display='none';" />
+
+                    <!-- Placeholder saat kamera mati -->
+                    <div id="camera-offline" style="position:absolute;inset:0;display:flex;flex-direction:column;
+                         align-items:center;justify-content:center;background:#040d14;gap:8px;">
+                        <div class="scan-line"></div>
+                        <div class="face-frame">
+                            <div class="face-frame-inner"></div>
+                            <div class="face-stats-overlay mono">
+                                STATUS: TRACKING...<br>
+                                ID: ATLET_472
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HUD overlay selalu tampil di atas video -->
+                    <div class="hud-labels" style="position:absolute;bottom:10px;left:12px;right:12px;
+                         display:flex;justify-content:space-between;z-index:5;">
+                        <div id="face-status-text">MENDETEKSI...</div>
+                        <div id="face-conf" class="mono">CONF: 96.7%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><i class="ti ti-scale"></i> REAL-TIME WEIGHT SENSOR</div>
+                <div class="weight-display">
+                    <div class="weight-num mono" id="weight-num">57.77</div>
+                    <div class="weight-unit">KILOGRAM</div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progress-bar" style="width: 31%;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ── LOG TABLE ── -->
+        <div class="panel" style="margin-top: 25px;">
+            <div class="panel-header"><i class="ti ti-history"></i> LOG VALIDASI TERAKHIR</div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ATLET</th>
+                            <th>KELAS</th>
+                            <th>BERAT</th>
+                            <th>FACE ID</th>
+                            <th>HASIL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-tbody">
+                        <tr>
+                            <td><strong>Rizal Saputra</strong></td>
+                            <td>Kelas C</td>
+                            <td class="mono">58.4 kg</td>
+                            <td><span class="status-verified"><i class="ti ti-circle-check"></i> Verified</span></td>
+                            <td><span class="badge-sah">SAH</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="Timbangan.js"></script>
+</body>
+
+</html>

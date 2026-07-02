@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SilaDash — Admin Panel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="web.css">
+    <link rel="stylesheet" href="Admin.css">
+</head>
+
+<body>
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <i class="ti ti-shield-bolt"></i> SILADASH
+        </div>
+        <div class="nav-links">
+            <a href="monitoring.html" class="nav-item">Monitoring</a>
+            <a href="Admin.html" class="nav-item active">Kelola Data</a>
+        </div>
+    </nav>
+
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="ti ti-user-cog"></i> <span>CONTROL CENTER</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="side-item active"><i class="ti ti-users"></i> Kelola Atlet</a>
+                <a href="#" class="side-item"><i class="ti ti-chart-bar"></i> Laporan Timbang</a>
+                <a href="#" class="side-item"><i class="ti ti-settings"></i> Sistem Setup</a>
+            </nav>
+        </aside>
+
+        <main class="main-admin">
+        </main>
+    </div>
+
+    <!-- MODAL FORM -->
+    <div id="modalForm" class="modal">
+        <div class="modal-content panel">
+            <div class="panel-header">INPUT DATA ATLET BARU</div>
+            <form id="atletForm" class="cyber-form">
+                <div class="form-group">
+                    <label>NAMA ATLET</label>
+                    <input type="text" id="atlet-nama" placeholder="Masukkan nama lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label>JENIS KELAMIN</label>
+                    <select id="atlet-gender">
+                        <option value="Putra">Putra (Laki-laki)</option>
+                        <option value="Putri">Putri (Perempuan)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>KELAS TANDING</label>
+                    <select id="atlet-kelas">
+                        <option value="Kelas A">Kelas A (45–50kg)</option>
+                        <option value="Kelas B">Kelas B (50–55kg)</option>
+                        <option value="Kelas C">Kelas C (55–60kg)</option>
+                        <option value="Kelas D">Kelas D (60–65kg)</option>
+                        <option value="Kelas E">Kelas E (65–70kg)</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">BATAL</button>
+                    <button type="submit" class="btn-save">
+                        <span id="btn-save-label">SIMPAN DATA</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/data.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
